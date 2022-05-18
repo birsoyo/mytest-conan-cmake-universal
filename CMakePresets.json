@@ -1,0 +1,45 @@
+{
+  "version": 3,
+  "configurePresets": [
+
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/builds/mytest-${presetName}",
+      "installDir": "${sourceDir}/installs/mytest-${presetName}"
+    },
+    {
+        "name": "base-ninja-clang",
+        "hidden": true,
+        "inherits": "base",
+        "generator": "Ninja",
+        "cacheVariables": {
+          "CMAKE_C_COMPILER": "clang",
+          "CMAKE_CXX_COMPILER": "clang++",
+          "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64"
+        }
+    },
+    {
+        "name": "release-ninja-clang",
+        "inherits": "base-ninja-clang",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Release"
+        }
+    },
+    {
+        "name": "debug-ninja-clang",
+        "inherits": "base-ninja-clang",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug"
+        }
+    },
+    {
+        "name": "xcode",
+        "inherits": "base",
+        "generator": "Xcode",
+        "cacheVariables": {
+          "CMAKE_OSX_ARCHITECTURES": "arm64;x86_64"
+        }
+    }
+  ]
+}
